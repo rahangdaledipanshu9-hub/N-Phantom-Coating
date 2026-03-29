@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-Phantom-Coating | Stealth Technology Innovation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1228 100%);
+            color: #e8e8e8;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Luxury Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(0deg, rgba(100, 180, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 180, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #64b4ff 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #ff6b9d 0%, transparent 70%);
+            bottom: -200px;
+            left: -200px;
+            animation: float 20s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(30px) translateX(30px); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(100, 180, 255, 0.2);
+            margin-bottom: 80px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #64b4ff, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Playfair Display', serif;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: #e8e8e8;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #64b4ff, #ff6b9d);
+            transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 84px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #64b4ff, #ff6b9d, #64b4ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 6s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            color: #b0b0d0;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .btn {
+            padding: 16px 48px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #64b4ff, #4a9ee6);
+            border-color: #64b4ff;
+            color: #0a0e27;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b9d, #ff5485);
+            transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border-color: #64b4ff;
+            color: #64b4ff;
+        }
+
+        .btn-secondary:hover {
+            background: #64b4ff;
+            color: #0a0e27;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            margin-bottom: 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #64b4ff, #ff6b9d);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(20, 25, 50, 0.6);
+            border: 1px solid rgba(100, 180, 255, 0.2);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 180, 255, 0.1), rgba(255, 107, 157, 0.1));
+            transition: left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: -1;
+        }
+
+        .feature-card:hover::before {
+            left: 0;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(100, 180, 255, 0.6);
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #64b4ff;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: #b0b0d0;
+            line-height: 1.8;
+        }
+
+        /* Specs Section */
+        .specs {
+            padding: 120px 0;
+            background: rgba(20, 25, 50, 0.3);
+            margin: 80px 0;
+            border-top: 1px solid rgba(100, 180, 255, 0.2);
+            border-bottom: 1px solid rgba(100, 180, 255, 0.2);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .spec-item {
+            padding: 30px;
+            text-align: center;
+            border-left: 3px solid transparent;
+            border-image: linear-gradient(180deg, #64b4ff, #ff6b9d) 1;
+            transition: all 0.4s ease;
+        }
+
+        .spec-item:hover {
+            transform: translateX(10px);
+        }
+
+        .spec-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            background: linear-gradient(135deg, #64b4ff, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .spec-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #b0b0d0;
+        }
+
+        /* Technology Stack */
+        .tech-stack {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .tech-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, rgba(100, 180, 255, 0.1), rgba(255, 107, 157, 0.1));
+            border: 1px solid rgba(100, 180, 255, 0.3);
+            padding: 30px 20px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .tech-badge:hover {
+            background: linear-gradient(135deg, rgba(100, 180, 255, 0.2), rgba(255, 107, 157, 0.2));
+            border-color: #64b4ff;
+            transform: scale(1.05);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px;
+            background: linear-gradient(135deg, rgba(100, 180, 255, 0.1), rgba(255, 107, 157, 0.1));
+            border-radius: 30px;
+            text-align: center;
+            margin: 80px 0;
+            border: 1px solid rgba(100, 180, 255, 0.3);
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: #b0b0d0;
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(100, 180, 255, 0.2);
+            padding: 60px 0;
+            text-align: center;
+            color: #808090;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #64b4ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ff6b9d;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .cta-section {
+                padding: 40px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">N-PHANTOM</div>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#specs">Specifications</a></li>
+                <li><a href="#tech">Technology</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>
+                    Redefining <span>Stealth</span>
+                </h1>
+                <p class="hero-subtitle">Cost-Efficient Multifunctional Coating System for Defence</p>
+                <div class="cta-buttons">
+                    <a href="#features" class="btn btn-primary">EXPLORE NOW</a>
+                    <a href="#contact" class="btn btn-secondary">GET STARTED</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <h2 class="section-title">Innovation Highlights</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Multi-Domain</h3>
+                    <p>Effective against radar and thermal detection across aerial, naval, and ground platforms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Indigenous</h3>
+                    <p>Locally sourced materials and manufacturing capability with zero import dependency</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Cost Efficient</h3>
+                    <p>Revolutionary pricing structure without compromising performance or durability</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Scalable</h3>
+                    <p>System-oriented design enables easy adaptation across diverse defence platforms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Durable</h3>
+                    <p>Enhanced resistance to environmental degradation, UV, salt, and temperature variations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Advanced</h3>
+                    <p>Layered functional design with integrated electromagnetic and thermal optimization</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specs Section -->
+        <section class="specs" id="specs">
+            <h2 class="section-title">Performance Metrics</h2>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <div class="spec-number">15+</div>
+                    <div class="spec-label">dB RCS Reduction</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-number">&lt;0.3</div>
+                    <div class="spec-label">Thermal Emissivity</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-number">&gt;5 MPa</div>
+                    <div class="spec-label">Adhesion Strength</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-number">500+</div>
+                    <div class="spec-label">Hours Salt Spray</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="tech-stack" id="tech">
+            <h2 class="section-title">Core Technology</h2>
+            <div class="tech-items">
+                <div class="tech-badge">Oxides Composites</div>
+                <div class="tech-badge">Ferrite Integration</div>
+                <div class="tech-badge">Resin Matrix</div>
+                <div class="tech-badge">Dispersing Agents</div>
+                <div class="tech-badge">Electromagnetic Analysis</div>
+                <div class="tech-badge">Thermal Optimization</div>
+                <div class="tech-badge">Surface Preparation</div>
+                <div class="tech-badge">Layer Integration</div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" id="contact">
+            <h2>Ready to Transform Defence Technology?</h2>
+            <p>Join us in advancing indigenous stealth coating innovation</p>
+            <a href="#" class="btn btn-primary">START YOUR JOURNEY</a>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 N-Phantom-Coating | Cost-Efficient Multifunctional Stealth Coating System</p>
+            <p><a href="#">GitHub</a> • <a href="#">Documentation</a> • <a href="#">Contact</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const element = document.querySelector(href);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Add scroll animation to feature cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
