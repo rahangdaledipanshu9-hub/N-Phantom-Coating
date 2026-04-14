@@ -165,27 +165,53 @@ class SpecCalculator {
   _updateLayerViz(comp, thickness, primerType) {
     const viz = document.getElementById('layer-viz');
     if (!viz) return;
-    const ferritePct  = comp.ferrite;
-    const oxidePct    = comp.oxide;
-    const topHeight   = Math.max(30, Math.round(thickness * 0.6));
-    const baseHeight  = Math.max(20, Math.round(thickness * 0.4));
+    const ferritePct = comp.ferrite;
+    const oxidePct   = comp.oxide;
+    const topHeight  = Math.max(30, Math.round(thickness * 0.6));
+    const baseHeight = Math.max(20, Math.round(thickness * 0.4));
 
-    viz.innerHTML = `
-      <div class="layer-strip layer-functional" style="min-height:${topHeight}px" 
-           data-tooltip="Functional Layer — ${ferritePct}% ferrite, ${oxidePct}% oxide">
-        <span class="layer-dot" style="background:var(--color-secondary)"></span>
-        Functional Layer · ${topHeight} µm
-      </div>
-      <div class="layer-strip layer-primer" style="min-height:${baseHeight}px"
-           data-tooltip="${primerType} primer">
-        <span class="layer-dot" style="background:var(--color-primary)"></span>
-        ${primerType.charAt(0).toUpperCase() + primerType.slice(1)} Primer · ${baseHeight} µm
-      </div>
-      <div class="layer-strip layer-substrate"
-           data-tooltip="Metal/composite substrate">
-        <span class="layer-dot" style="background:var(--color-dim)"></span>
-        Substrate
-      </div>`;
+    // Whitelist-sanitise primerType to prevent XSS via DOM injection
+    const ALLOWED_PRIMERS = new Set(['epoxy', 'polyurethane', 'acrylic']);
+    const safePrimer = ALLOWED_PRIMERS.has(primerType) ? primerType : 'epoxy';
+    const primerLabel = safePrimer.charAt(0).toUpperCase() + safePrimer.slice(1);
+
+    // Build DOM nodes directly to avoid innerHTML with interpolated data
+    viz.textContent = ''; // clear safely
+
+    const makeStrip = (classes, minHeight, dotColor, tooltip, labelText) => {
+      const strip = document.createElement('div');
+      strip.className = classes;
+      strip.style.minHeight = `${minHeight}px`;
+      strip.setAttribute('data-tooltip', tooltip); // tooltip is plain text, no HTML
+      const dot = document.createElement('span');
+      dot.className = 'layer-dot';
+      dot.style.background = dotColor;
+      strip.appendChild(dot);
+      strip.appendChild(document.createTextNode(' ' + labelText));
+      return strip;
+    };
+
+    viz.appendChild(makeStrip(
+      'layer-strip layer-functional',
+      topHeight,
+      'var(--color-secondary)',
+      `Functional Layer — ${ferritePct}% ferrite, ${oxidePct}% oxide`,
+      `Functional Layer · ${topHeight} µm`,
+    ));
+    viz.appendChild(makeStrip(
+      'layer-strip layer-primer',
+      baseHeight,
+      'var(--color-primary)',
+      `${primerLabel} primer`,
+      `${primerLabel} Primer · ${baseHeight} µm`,
+    ));
+    viz.appendChild(makeStrip(
+      'layer-strip layer-substrate',
+      0,
+      'var(--color-dim)',
+      'Metal/composite substrate',
+      'Substrate',
+    ));
   }
 
   _updateSliderLabels() {
