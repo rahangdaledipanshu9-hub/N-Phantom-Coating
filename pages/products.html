@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="N-Phantom Coating product catalog — stealth coating solutions for aerial, naval, and ground defence platforms.">
+  <title>Products | N-Phantom-Coating</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb-1" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb-2" aria-hidden="true"></div>
+
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <header>
+    <nav class="navbar" aria-label="Primary navigation">
+      <div class="container">
+        <a href="../index.html" class="logo" aria-label="N-Phantom home">N-PHANTOM</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" role="list">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="products.html" style="color:var(--color-primary)">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section class="hero" style="min-height:40vh;padding:60px 0" aria-label="Page header">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge">🔬 &nbsp; Product Catalog</span>
+          <h1>Stealth Coating <span class="gradient-text">Solutions</span></h1>
+          <p class="hero-subtitle">Engineered formulations for every defence platform and operational requirement.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Search & Filter ───────────────────────────────────── -->
+    <section class="section" style="padding-top:0" aria-label="Product filter">
+      <div class="container" style="max-width:900px">
+        <div class="form-group">
+          <label class="form-label sr-only" for="product-search">Search products</label>
+          <input type="search" id="product-search" class="form-control" placeholder="🔍  Search products…" aria-label="Search products">
+          <p id="product-search-empty" hidden style="color:var(--color-muted);margin-top:10px;font-size:14px">
+            No products match your search.
+          </p>
+        </div>
+
+        <!-- Tab filter -->
+        <div class="tabs">
+          <div class="tabs-nav" role="tablist" aria-label="Product category filter">
+            <button class="tab-btn active" role="tab" aria-selected="true" data-filter="all">All Products</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-filter="aerial">Aerial</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-filter="naval">Naval</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-filter="ground">Ground</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Product Grid ──────────────────────────────────────── -->
+    <section class="section" style="padding-top:var(--space-sm)" aria-label="Product listings">
+      <div class="container">
+        <div id="product-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--space-lg)">
+
+          <!-- NPC-A1 Aerial -->
+          <article class="product-card animate-on-scroll" data-category="aerial" data-name="NPC-A1 Aerial Grade">
+            <div class="product-card-header">
+              <div class="product-icon" aria-hidden="true">✈️</div>
+              <h3>NPC-A1 Aerial Grade</h3>
+              <p>High-altitude stealth coating for fixed-wing &amp; UAV platforms</p>
+            </div>
+            <div class="product-card-body">
+              <div class="product-spec-row">
+                <span class="product-spec-label">RCS Reduction</span>
+                <span class="product-spec-value">&gt; 16 dB</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Thermal Emissivity</span>
+                <span class="product-spec-value">&lt; 0.25</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Weight (g/m²)</span>
+                <span class="product-spec-value">320</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Temp Range</span>
+                <span class="product-spec-value">−55 °C to +180 °C</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Adhesion</span>
+                <span class="product-spec-value">&gt; 7 MPa</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Status</span>
+                <span><span class="badge badge-success">Available</span></span>
+              </div>
+            </div>
+            <div class="product-card-footer">
+              <button class="btn btn-primary" style="flex:1" data-modal-open="product-modal-a1">View Details</button>
+              <a href="dashboard.html" class="btn btn-outline" style="flex:1">Simulate</a>
+            </div>
+          </article>
+
+          <!-- NPC-N1 Naval -->
+          <article class="product-card animate-on-scroll" data-category="naval" data-name="NPC-N1 Naval Shield">
+            <div class="product-card-header">
+              <div class="product-icon" aria-hidden="true">🚢</div>
+              <h3>NPC-N1 Naval Shield</h3>
+              <p>Marine-grade stealth coating for surface vessels &amp; submarines</p>
+            </div>
+            <div class="product-card-body">
+              <div class="product-spec-row">
+                <span class="product-spec-label">RCS Reduction</span>
+                <span class="product-spec-value">&gt; 14 dB</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Thermal Emissivity</span>
+                <span class="product-spec-value">&lt; 0.30</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Weight (g/m²)</span>
+                <span class="product-spec-value">480</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Salt Spray</span>
+                <span class="product-spec-value">&gt; 1000 h</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Adhesion</span>
+                <span class="product-spec-value">&gt; 6 MPa</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Status</span>
+                <span><span class="badge badge-success">Available</span></span>
+              </div>
+            </div>
+            <div class="product-card-footer">
+              <button class="btn btn-primary" style="flex:1" data-modal-open="product-modal-n1">View Details</button>
+              <a href="dashboard.html" class="btn btn-outline" style="flex:1">Simulate</a>
+            </div>
+          </article>
+
+          <!-- NPC-G1 Ground -->
+          <article class="product-card animate-on-scroll" data-category="ground" data-name="NPC-G1 Ground Force">
+            <div class="product-card-header">
+              <div class="product-icon" aria-hidden="true">🚙</div>
+              <h3>NPC-G1 Ground Force</h3>
+              <p>Robust stealth coating for military vehicles &amp; installations</p>
+            </div>
+            <div class="product-card-body">
+              <div class="product-spec-row">
+                <span class="product-spec-label">RCS Reduction</span>
+                <span class="product-spec-value">&gt; 13 dB</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Thermal Emissivity</span>
+                <span class="product-spec-value">&lt; 0.32</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Weight (g/m²)</span>
+                <span class="product-spec-value">560</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Impact Resistance</span>
+                <span class="product-spec-value">&gt; 120 in·lb</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Adhesion</span>
+                <span class="product-spec-value">&gt; 5 MPa</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Status</span>
+                <span><span class="badge badge-success">Available</span></span>
+              </div>
+            </div>
+            <div class="product-card-footer">
+              <button class="btn btn-primary" style="flex:1" data-modal-open="product-modal-g1">View Details</button>
+              <a href="dashboard.html" class="btn btn-outline" style="flex:1">Simulate</a>
+            </div>
+          </article>
+
+          <!-- NPC-U1 UAV -->
+          <article class="product-card animate-on-scroll" data-category="aerial" data-name="NPC-U1 Micro-UAV">
+            <div class="product-card-header">
+              <div class="product-icon" aria-hidden="true">🛸</div>
+              <h3>NPC-U1 Micro-UAV</h3>
+              <p>Ultra-lightweight formulation for small UAV &amp; drone platforms</p>
+            </div>
+            <div class="product-card-body">
+              <div class="product-spec-row">
+                <span class="product-spec-label">RCS Reduction</span>
+                <span class="product-spec-value">&gt; 12 dB</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Thermal Emissivity</span>
+                <span class="product-spec-value">&lt; 0.28</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Weight (g/m²)</span>
+                <span class="product-spec-value">180</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Flex Crack</span>
+                <span class="product-spec-value">Pass 3 mm mandrel</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Adhesion</span>
+                <span class="product-spec-value">&gt; 5 MPa</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Status</span>
+                <span><span class="badge badge-warning">Beta</span></span>
+              </div>
+            </div>
+            <div class="product-card-footer">
+              <button class="btn btn-primary" style="flex:1" data-modal-open="product-modal-u1">View Details</button>
+              <a href="dashboard.html" class="btn btn-outline" style="flex:1">Simulate</a>
+            </div>
+          </article>
+
+          <!-- NPC-S1 Submarine -->
+          <article class="product-card animate-on-scroll" data-category="naval" data-name="NPC-S1 Submarine Deep">
+            <div class="product-card-header">
+              <div class="product-icon" aria-hidden="true">🤿</div>
+              <h3>NPC-S1 Submarine Deep</h3>
+              <p>Pressure-rated underwater stealth coating for submarine hulls</p>
+            </div>
+            <div class="product-card-body">
+              <div class="product-spec-row">
+                <span class="product-spec-label">Sonar Absorption</span>
+                <span class="product-spec-value">&gt; 10 dB</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Depth Rating</span>
+                <span class="product-spec-value">300 m</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Weight (g/m²)</span>
+                <span class="product-spec-value">720</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Biofouling Resist.</span>
+                <span class="product-spec-value">Excellent</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Adhesion</span>
+                <span class="product-spec-value">&gt; 8 MPa</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Status</span>
+                <span><span class="badge badge-info">Development</span></span>
+              </div>
+            </div>
+            <div class="product-card-footer">
+              <button class="btn btn-primary" style="flex:1" data-modal-open="product-modal-s1">View Details</button>
+              <a href="dashboard.html" class="btn btn-outline" style="flex:1">Simulate</a>
+            </div>
+          </article>
+
+          <!-- NPC-M1 Multi-role -->
+          <article class="product-card animate-on-scroll" data-category="ground aerial naval" data-name="NPC-M1 Multi-Role">
+            <div class="product-card-header">
+              <div class="product-icon" aria-hidden="true">⚔️</div>
+              <h3>NPC-M1 Multi-Role</h3>
+              <p>Universal formulation adaptable across all platform types</p>
+            </div>
+            <div class="product-card-body">
+              <div class="product-spec-row">
+                <span class="product-spec-label">RCS Reduction</span>
+                <span class="product-spec-value">&gt; 15 dB</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Thermal Emissivity</span>
+                <span class="product-spec-value">&lt; 0.30</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Weight (g/m²)</span>
+                <span class="product-spec-value">420</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Temp Range</span>
+                <span class="product-spec-value">−40 °C to +120 °C</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Adhesion</span>
+                <span class="product-spec-value">&gt; 6 MPa</span>
+              </div>
+              <div class="product-spec-row">
+                <span class="product-spec-label">Status</span>
+                <span><span class="badge badge-success">Available</span></span>
+              </div>
+            </div>
+            <div class="product-card-footer">
+              <button class="btn btn-primary" style="flex:1" data-modal-open="product-modal-m1">View Details</button>
+              <a href="dashboard.html" class="btn btn-outline" style="flex:1">Simulate</a>
+            </div>
+          </article>
+
+        </div><!-- /#product-grid -->
+      </div>
+    </section>
+
+    <!-- ── CTA ──────────────────────────────────────────────── -->
+    <section class="section" aria-label="Call to Action">
+      <div class="container">
+        <div class="cta-banner animate-on-scroll">
+          <h2>Need a Custom Formulation?</h2>
+          <p>Our engineering team can develop tailored coating solutions for your specific platform and threat environment.</p>
+          <a href="services.html#contact" class="btn btn-primary">Request Custom Quote</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Product Detail Modals ────────────────────────────────── -->
+  <div id="product-modal-a1" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-a1-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-a1-title">NPC-A1 Aerial Grade — Full Specification</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <p style="color:var(--color-muted);margin-bottom:var(--space-sm)">
+        Developed specifically for fixed-wing aircraft, helicopters, and medium-to-large UAVs requiring low-observability in X and Ku-band radar frequencies.
+      </p>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Frequency Range</td><td>2–18 GHz</td></tr>
+          <tr><td>Peak Absorption</td><td>10 GHz (X-band)</td></tr>
+          <tr><td>Resin System</td><td>Epoxy / PU blend</td></tr>
+          <tr><td>Ferrite Loading</td><td>22% by weight</td></tr>
+          <tr><td>Cure Schedule</td><td>24 h @ 25 °C</td></tr>
+          <tr><td>Shelf Life</td><td>12 months (sealed)</td></tr>
+          <tr><td>Certification</td><td>MIL-PRF-85285 compatible</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="product-modal-n1" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-n1-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-n1-title">NPC-N1 Naval Shield — Full Specification</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <p style="color:var(--color-muted);margin-bottom:var(--space-sm)">
+        Marine-hardened formulation with enhanced corrosion resistance, biofouling protection, and superior adhesion to marine steel substrates.
+      </p>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Frequency Range</td><td>1–12 GHz</td></tr>
+          <tr><td>Salt Spray</td><td>&gt; 1000 h (ASTM B117)</td></tr>
+          <tr><td>Resin System</td><td>Modified epoxy</td></tr>
+          <tr><td>Ferrite Loading</td><td>18% by weight</td></tr>
+          <tr><td>Cure Schedule</td><td>48 h @ 25 °C</td></tr>
+          <tr><td>Topcoat</td><td>Antifouling compatible</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="product-modal-g1" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-g1-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-g1-title">NPC-G1 Ground Force — Full Specification</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <p style="color:var(--color-muted);margin-bottom:var(--space-sm)">
+        Heavy-duty coating for armoured vehicles, mobile artillery, and field installations. Optimised for high-impact and abrasion environments.
+      </p>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Frequency Range</td><td>2–10 GHz</td></tr>
+          <tr><td>Impact Resistance</td><td>&gt; 120 in·lb (ASTM D2794)</td></tr>
+          <tr><td>Resin System</td><td>Polyurethane</td></tr>
+          <tr><td>Ferrite Loading</td><td>20% by weight</td></tr>
+          <tr><td>Cure Schedule</td><td>24 h @ 25 °C</td></tr>
+          <tr><td>Camouflage Tint</td><td>Available in MIL-C-46168 colours</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="product-modal-u1" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-u1-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-u1-title">NPC-U1 Micro-UAV — Full Specification</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <p style="color:var(--color-muted);margin-bottom:var(--space-sm)">
+        Ultra-thin, flexible formulation specifically designed for small UAV platforms where weight and aerodynamic profile are critical.
+      </p>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Dry Film Thickness</td><td>80–120 µm total</td></tr>
+          <tr><td>Flexibility</td><td>Pass 3 mm mandrel bend</td></tr>
+          <tr><td>Resin System</td><td>Acrylic / PU blend</td></tr>
+          <tr><td>Ferrite Loading</td><td>15% by weight</td></tr>
+          <tr><td>Application Method</td><td>Spray only</td></tr>
+          <tr><td>Status</td><td>Beta — field trials Q2 2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="product-modal-s1" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-s1-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-s1-title">NPC-S1 Submarine Deep — Full Specification</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <p style="color:var(--color-muted);margin-bottom:var(--space-sm)">
+        Acoustic and thermal stealth formulation rated for deep-water submarine applications with biofouling resistance.
+      </p>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Depth Rating</td><td>300 m operational</td></tr>
+          <tr><td>Acoustic Absorption</td><td>&gt; 10 dB (sonar band)</td></tr>
+          <tr><td>Resin System</td><td>Rubber-modified epoxy</td></tr>
+          <tr><td>Cure Schedule</td><td>72 h @ 25 °C</td></tr>
+          <tr><td>Status</td><td>Development — Q4 2025 target</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="product-modal-m1" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-m1-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-m1-title">NPC-M1 Multi-Role — Full Specification</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <p style="color:var(--color-muted);margin-bottom:var(--space-sm)">
+        The most versatile product in the N-Phantom range. A universal formulation with balanced properties suitable for any platform type.
+      </p>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Frequency Range</td><td>2–18 GHz</td></tr>
+          <tr><td>Resin System</td><td>Epoxy / PU balanced blend</td></tr>
+          <tr><td>Ferrite Loading</td><td>20% by weight</td></tr>
+          <tr><td>Oxide Loading</td><td>33% by weight</td></tr>
+          <tr><td>Cure Schedule</td><td>24 h @ 25 °C</td></tr>
+          <tr><td>Certification</td><td>MIL-PRF-85285 compatible</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Footer ────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">N-PHANTOM</div>
+          <p class="mt-sm">Cost-Efficient Multifunctional Stealth Coating System for Defence Applications.</p>
+        </div>
+        <nav class="footer-col"><h4>Product</h4>
+          <a href="products.html">Product Catalog</a>
+          <a href="dashboard.html">Dashboard</a>
+        </nav>
+        <nav class="footer-col"><h4>Resources</h4>
+          <a href="services.html">Services</a>
+          <a href="../README.md">Documentation</a>
+        </nav>
+        <nav class="footer-col"><h4>Company</h4>
+          <a href="../CONTRIBUTING.md">Contributing</a>
+          <a href="../LICENSE">License</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024 N-Phantom-Coating. All rights reserved.</span>
+        <span>MIT License | Indigenous Defence Innovation</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script src="../js/interactions.js"></script>
+
+  <!-- Category tab filter -->
+  <script>
+    document.querySelectorAll('.tab-btn[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn[data-filter]').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('#product-grid .product-card').forEach(card => {
+          const cat = card.dataset.category || '';
+          card.style.display = (filter === 'all' || cat.includes(filter)) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

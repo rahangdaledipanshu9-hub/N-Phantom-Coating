@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="N-Phantom Coating interactive specification dashboard — calculate RCS reduction, thermal emissivity, and adhesion properties.">
+  <title>Dashboard | N-Phantom-Coating</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb-1" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb-2" aria-hidden="true"></div>
+
+  <!-- ── Navbar ──────────────────────────────────────────────── -->
+  <header>
+    <nav class="navbar" aria-label="Primary navigation">
+      <div class="container">
+        <a href="../index.html" class="logo" aria-label="N-Phantom home">N-PHANTOM</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" role="list">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="dashboard.html" style="color:var(--color-primary)">Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ── Dashboard Shell ─────────────────────────────────────── -->
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-header">
+        <h2>N-Phantom Dashboard</h2>
+      </div>
+      <ul class="sidebar-nav" role="list">
+        <li class="sidebar-nav-item active">
+          <a href="#" data-section="overview" aria-current="page">
+            <span class="sidebar-icon" aria-hidden="true">📊</span> Overview
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#" data-section="calculator">
+            <span class="sidebar-icon" aria-hidden="true">🧮</span> Spec Calculator
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#" data-section="frequency">
+            <span class="sidebar-icon" aria-hidden="true">📡</span> Frequency Response
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#" data-section="layers">
+            <span class="sidebar-icon" aria-hidden="true">🔬</span> Layer Visualizer
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#" data-section="performance">
+            <span class="sidebar-icon" aria-hidden="true">🎯</span> Performance
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main area -->
+    <main class="dashboard-main" id="main-content" aria-live="polite">
+
+      <!-- ── Overview section ────────────────────────────────── -->
+      <div id="overview" class="dash-section">
+        <div class="dashboard-header">
+          <h1>System Overview</h1>
+          <div class="dashboard-actions">
+            <button id="export-spec" class="btn btn-secondary" style="padding:10px 20px">
+              ⬇ Export Spec
+            </button>
+            <button id="print-spec" class="btn btn-outline" style="padding:10px 20px">
+              🖨 Print
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI cards -->
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-label">RCS Reduction</div>
+            <div class="kpi-value" id="kpi-rcs">—</div>
+            <div class="kpi-delta up">↑ Target: ≥ 15 dB</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Thermal Emissivity</div>
+            <div class="kpi-value" id="kpi-emiss">—</div>
+            <div class="kpi-delta up">↓ Target: &lt; 0.3</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Adhesion Strength</div>
+            <div class="kpi-value" id="kpi-adhesion">—</div>
+            <div class="kpi-delta up">↑ Target: ≥ 5 MPa</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Salt Spray Est.</div>
+            <div class="kpi-value" id="kpi-salt">—</div>
+            <div class="kpi-delta up">↑ Target: ≥ 500 h</div>
+          </div>
+        </div>
+
+        <!-- Two-column charts -->
+        <div class="two-col">
+          <!-- Composition bars -->
+          <div class="chart-panel">
+            <div class="chart-panel-header">
+              <h3 class="chart-panel-title">Material Composition</h3>
+              <span class="badge badge-info">Live</span>
+            </div>
+            <div class="bar-chart" aria-label="Material composition bar chart">
+              <div class="bar-row">
+                <span class="bar-label">Resin</span>
+                <div class="bar-track"><div class="bar-fill" id="bar-resin"></div></div>
+                <span class="bar-value" id="bar-val-resin">40%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Oxide</span>
+                <div class="bar-track"><div class="bar-fill" id="bar-oxide"></div></div>
+                <span class="bar-value" id="bar-val-oxide">35%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Ferrite</span>
+                <div class="bar-track"><div class="bar-fill" id="bar-ferrite"></div></div>
+                <span class="bar-value" id="bar-val-ferrite">20%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Dispersant</span>
+                <div class="bar-track"><div class="bar-fill" id="bar-dispersant"></div></div>
+                <span class="bar-value" id="bar-val-dispersant">5%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Radar chart -->
+          <div class="chart-panel">
+            <div class="chart-panel-header">
+              <h3 class="chart-panel-title">Performance Radar</h3>
+            </div>
+            <div class="radar-chart">
+              <canvas id="radar-chart" aria-label="Performance radar chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer visualizer preview -->
+        <div class="chart-panel">
+          <div class="chart-panel-header">
+            <h3 class="chart-panel-title">Layer Architecture</h3>
+            <span class="badge badge-success">Active Config</span>
+          </div>
+          <div class="layer-viz" id="layer-viz" aria-label="Layer architecture diagram"></div>
+        </div>
+      </div>
+
+      <!-- ── Spec Calculator section ─────────────────────────── -->
+      <div id="calculator" class="dash-section hidden">
+        <div class="dashboard-header">
+          <h1>Specification Calculator</h1>
+        </div>
+
+        <div class="two-col">
+          <!-- Form -->
+          <form id="spec-form" class="chart-panel" aria-label="Coating specification form" novalidate>
+            <h3 class="chart-panel-title" style="margin-bottom:var(--space-md)">Composition Input</h3>
+
+            <!-- Primer type -->
+            <div class="form-group">
+              <label class="form-label" for="primer-type">Primer Type</label>
+              <select class="form-control" id="primer-type" name="primer-type">
+                <option value="epoxy">Epoxy (highest adhesion)</option>
+                <option value="polyurethane">Polyurethane (flexible)</option>
+                <option value="acrylic">Acrylic (fast dry)</option>
+              </select>
+            </div>
+
+            <!-- Layer thickness -->
+            <div class="form-group">
+              <label class="form-label" for="layer-thickness">
+                Total Thickness (µm) — <span data-slider-label="layer-thickness">200</span> µm
+              </label>
+              <input type="range" class="form-control" id="layer-thickness" name="layer-thickness"
+                     min="50" max="500" value="200" step="10">
+            </div>
+
+            <!-- Composition sliders -->
+            <div class="spec-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="resin-pct">
+                  Resin % — <span data-slider-label="resin-pct">40</span>
+                </label>
+                <input type="range" class="form-control" id="resin-pct" name="resin-pct"
+                       min="10" max="70" value="40" step="1">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="oxide-pct">
+                  Oxide % — <span data-slider-label="oxide-pct">35</span>
+                </label>
+                <input type="range" class="form-control" id="oxide-pct" name="oxide-pct"
+                       min="5" max="60" value="35" step="1">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ferrite-pct">
+                  Ferrite % — <span data-slider-label="ferrite-pct">20</span>
+                </label>
+                <input type="range" class="form-control" id="ferrite-pct" name="ferrite-pct"
+                       min="5" max="50" value="20" step="1">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="dispersant-pct">
+                  Dispersant % — <span data-slider-label="dispersant-pct">5</span>
+                </label>
+                <input type="range" class="form-control" id="dispersant-pct" name="dispersant-pct"
+                       min="1" max="15" value="5" step="1">
+              </div>
+            </div>
+          </form>
+
+          <!-- Live results -->
+          <div class="chart-panel">
+            <h3 class="chart-panel-title" style="margin-bottom:var(--space-md)">Estimated Properties</h3>
+            <div id="spec-results" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Frequency Response section ─────────────────────── -->
+      <div id="frequency" class="dash-section hidden">
+        <div class="dashboard-header">
+          <h1>Frequency Response</h1>
+        </div>
+        <div class="chart-panel">
+          <div class="chart-panel-header">
+            <h3 class="chart-panel-title">S11 vs Frequency (2–18 GHz)</h3>
+            <span class="badge badge-info">Simulated</span>
+          </div>
+          <canvas id="freq-chart" style="width:100%;display:block" aria-label="Frequency response chart"></canvas>
+          <p style="font-size:13px;color:var(--color-dim);margin-top:8px;font-family:var(--font-mono)">
+            * Simulated absorption profile. Real data requires VNA measurement.
+          </p>
+        </div>
+      </div>
+
+      <!-- ── Layer Visualizer section ────────────────────────── -->
+      <div id="layers" class="dash-section hidden">
+        <div class="dashboard-header">
+          <h1>Layer Visualizer</h1>
+        </div>
+        <div class="chart-panel">
+          <div class="chart-panel-header">
+            <h3 class="chart-panel-title">Cross-Section Architecture</h3>
+          </div>
+          <div class="layer-viz" id="layer-viz-detail" style="max-width:500px;margin:0 auto" aria-label="Layer cross-section"></div>
+          <p class="text-muted mt-md" style="font-size:14px">
+            Adjust composition sliders in the <a href="#" data-section="calculator" style="color:var(--color-primary)">Spec Calculator</a> 
+            to update layer proportions.
+          </p>
+        </div>
+
+        <!-- Process steps -->
+        <div class="chart-panel" style="margin-top:var(--space-md)">
+          <h3 class="chart-panel-title" style="margin-bottom:var(--space-md)">Application Process</h3>
+          <div class="accordion">
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>Step 1 — Substrate Preparation</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                Clean substrate thoroughly to remove grease and contaminants. Roughen surface using grit blasting (Sa 2.5 standard). 
+                Eliminate all moisture and ensure surface is dry before coating.
+              </div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>Step 2 — Primer Application</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                Apply primer layer at 80–120 µm wet film thickness using spray or brush technique. 
+                Allow 24 hours stabilisation at 25 °C before proceeding to functional layer.
+              </div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>Step 3 — Functional Layer Application</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                Apply functional coating at 150–250 µm wet film thickness. Ensure even coverage with no pinholes. 
+                Cure at ambient temperature (25 °C) for 48 hours minimum.
+              </div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span>Step 4 — Quality Verification</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                Perform adhesion cross-cut test, measure dry film thickness at multiple points, 
+                and conduct visual inspection for surface defects before system clearance.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Performance section ─────────────────────────────── -->
+      <div id="performance" class="dash-section hidden">
+        <div class="dashboard-header">
+          <h1>Performance Metrics</h1>
+        </div>
+
+        <!-- Performance table -->
+        <div class="chart-panel">
+          <div class="chart-panel-header">
+            <h3 class="chart-panel-title">Test Results Summary</h3>
+            <span class="badge badge-success">Validated</span>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table" aria-label="Performance test results">
+              <thead>
+                <tr>
+                  <th>Test Parameter</th>
+                  <th>Method</th>
+                  <th>Target</th>
+                  <th>Achieved</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>RCS Reduction (X-band)</td>
+                  <td>VNA / Arch method</td>
+                  <td>&gt; 15 dB</td>
+                  <td>16.3 dB</td>
+                  <td><span class="badge badge-success">✓ Pass</span></td>
+                </tr>
+                <tr>
+                  <td>Thermal Emissivity</td>
+                  <td>FTIR Spectroscopy</td>
+                  <td>&lt; 0.30</td>
+                  <td>0.24</td>
+                  <td><span class="badge badge-success">✓ Pass</span></td>
+                </tr>
+                <tr>
+                  <td>Adhesion Strength</td>
+                  <td>Cross-cut / Pull-off</td>
+                  <td>&gt; 5 MPa</td>
+                  <td>7.2 MPa</td>
+                  <td><span class="badge badge-success">✓ Pass</span></td>
+                </tr>
+                <tr>
+                  <td>Salt Spray Resistance</td>
+                  <td>ASTM B117</td>
+                  <td>&gt; 500 h</td>
+                  <td>480 h (in progress)</td>
+                  <td><span class="badge badge-warning">⏳ Ongoing</span></td>
+                </tr>
+                <tr>
+                  <td>UV Stability</td>
+                  <td>ASTM G154</td>
+                  <td>&gt; 1000 h</td>
+                  <td>720 h (in progress)</td>
+                  <td><span class="badge badge-warning">⏳ Ongoing</span></td>
+                </tr>
+                <tr>
+                  <td>Impact Resistance</td>
+                  <td>ASTM D2794</td>
+                  <td>Pass 80 in·lb</td>
+                  <td>Pass 120 in·lb</td>
+                  <td><span class="badge badge-success">✓ Pass</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Progress bars -->
+        <div class="chart-panel" style="margin-top:var(--space-md)">
+          <h3 class="chart-panel-title" style="margin-bottom:var(--space-md)">Target Achievement (%)</h3>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:14px;color:var(--color-muted)">RCS Reduction</span>
+                <span style="font-family:var(--font-mono);font-size:13px;color:var(--color-primary)">109%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" data-value="100"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:14px;color:var(--color-muted)">Thermal Emissivity</span>
+                <span style="font-family:var(--font-mono);font-size:13px;color:var(--color-primary)">125%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" data-value="100"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:14px;color:var(--color-muted)">Adhesion Strength</span>
+                <span style="font-family:var(--font-mono);font-size:13px;color:var(--color-primary)">144%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" data-value="100"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:14px;color:var(--color-muted)">Salt Spray</span>
+                <span style="font-family:var(--font-mono);font-size:13px;color:var(--color-primary)">96%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" data-value="96"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:14px;color:var(--color-muted)">UV Stability</span>
+                <span style="font-family:var(--font-mono);font-size:13px;color:var(--color-primary)">72%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" data-value="72"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.dashboard-layout -->
+
+  <!-- Toast container inserted by JS -->
+
+  <script src="../js/script.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
